@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Task 1: Parent</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1c1f4a;
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+
+    h2, h3, h4, h5 {
+      color: #1c1f4a;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 15px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    pre {
+      background: #f3f3f3;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: white;
+      background-color: #1c1f4a;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: #0f1136;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Task 1: Parent</h1>
+    <p>This task aimed to extract patient data, retrieve their associated conditions, and enhance the data with parent SNOMED CT codes. Once transformed, the data was uploaded to the Primary Care FHIR Server.</p>
+
+    <h3>Coding Task 1: Parent</h3>
+    <h4>Code Snippets:</h4>
+    <h5>Fetching Patient Details and Posting to Primary Care</h5>
+    <pre><code>
+def search_patient_by_name(name_string):
+    """Search for a patient by name."""
+    url = f'{BASE_URL}/Patient?name={name_string}'
+    response = requests.get(url, headers=get_headers())
+    print(response.url)
+    data = response.json()
+    if 'entry' in data:
+        patient = data['entry'][0]['resource']
+        resource_id = patient['id']
+        given_name = patient['name'][0]['given'][0]
+        family_name = patient['name'][0]['family']
+        print(f"Resource ID: {resource_id} - {given_name} {family_name}")
+        return resource_id
+    print("No patients found.")
+    return None
+
+def post_patient_to_primary_care(patient_data):
+    """Post patient data to Primary Care."""
+    response = requests.post(PRIMARY_CARE_URL, headers=get_headers(), json=patient_data)
+    if response.status_code in [200, 201]:
+        print("Patient data posted successfully to Primary Care!")
+        return response.json().get("id")
+    else:
+        print(f"Failed to post patient data. Status code: {response.status_code}")
+        print(f"Error: {response.text}")
+        return None
+    </code></pre>
+
+    <h5>Saving Resource ID Locally</h5>
+    <pre><code>
+def save_resource_id_to_file(resource_id):
+    """Save resource ID to a file."""
+    with open(RESOURCE_FILE, 'w') as file:
+        file.write(resource_id)
+    print(f"Resource ID {resource_id} saved to {RESOURCE_FILE}.")
+    </code></pre>
+
+    <h5>Fetching Condition of the Patient</h5>
+    <pre><code>
+def get_one_condition(patient_resource_id):
+    """Retrieve one condition for a given patient."""
+    url = f'{BASE_URL}/Condition?patient={patient_resource_id}'
+    response = requests.get(url, headers=get_headers())
+    print(response.url)
+    data = response.json()
+    if 'entry' in data and data['entry']:
+        resource = data['entry'][0]['resource']
+        return resource.get('code', {}).get('coding', [{}])[0].get('code', 'Unknown Code')
+    print("No conditions found.")
+    return None
+    </code></pre>
+
+    <h5>Retrieving Parent SNOMED Code and Posting Condition</h5>
+    <pre><code>
+def get_direct_parent_snomed(snomed_code):
+    """Retrieve the direct parent SNOMED concept for a given code."""
+    url = f'{BASE_HERMES_URL}/search?constraint=>! {snomed_code}'
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        if data:
+            parent = data[0]
+            return parent['conceptId'], parent['preferredTerm']
+    print(f"Failed to fetch data from Hermes. HTTP Status Code: {response.status_code}")
+    return None, None
+
+def post_condition_to_primary_care(condition_data):
+    """Post condition data to Primary Care."""
+    response = requests.post(CONDITION_URL, headers=get_headers(), json=condition_data)
+    if response.status_code in [200, 201]:
+        print("Condition data posted successfully to Primary Care!")
+        pprint(response.json())
+    else:
+        print(f"Failed to post condition data. Status code: {response.status_code}")
+        print(f"Error: {response.text}")
+    </code></pre>
+
+    <a href="etl_pipeline_documentation.html" class="button">Back to ETL Pipeline</a>
+  </div>
+</body>
+</html>
