@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Use Case Diagram Page</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1c1f4a;
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+
+    h2 {
+      color: #1c1f4a;
+      margin-bottom: 8px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #1c1f4a;
+      padding: 8px 0;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      padding: 8px 12px;
+      margin: 0 3px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      background-color: #0f1136;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 10px auto;
+      padding: 15px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    section {
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    /* Section Colors */
+    section:nth-child(odd) {
+      background-color: #e3f2fd;
+    }
+
+    section:nth-child(even) {
+      background-color: #f7f7f7;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 10px auto;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .description {
+      text-align: justify;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: white;
+      background-color: #1c1f4a; /* Same as navbar color */
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: #0f1136;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      background-color: #1c1f4a;
+      color: white;
+      padding: 10px 0;
+      margin-top: 10px;
+    }
+
+    footer a {
+      color: #90caf9;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="bpmn_diagram.html">BPMN Model</a>
+    <a href="use_case_diagram.html">Use Case Diagram</a>
+    <a href="etl_pipeline_documentation.html">ETL Pipeline Documentation</a>
+    <a href="insights.html">Insights</a>
+    <a href="team_contributions.html">Team Contributions</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <!-- Content -->
+  <div class="container">
+    <h1>Use Case Diagram Page</h1>
+
+    <!-- Use Case Diagram Section -->
+    <section>
+      <h2>Use Case Diagram</h2>
+      <p>Below is the use case diagram illustrating the actors and use cases involved in this ETL project:</p>
+      <img src="assets/use_case_diagram.png" alt="Use Case Diagram">
+      <p>
+        <a href="https://lucid.app/lucidchart/75456c54-02c8-40e3-90ae-64a93d344e87/edit?viewport_loc=-950%2C-1780%2C4641%2C2680%2C0_0&invitationId=inv_480caed3-542e-44b3-8fe1-5f49dd724116" target="_blank" class="button">View Full Use Case Diagram</a>
+      </p>
+    </section>
+
+    <!-- Description Section -->
+    <section class="description">
+      <h2>Description</h2>
+      <p>
+        The Primary Care Clinic initiates the referral process by identifying the need for specialized care and referring the patient to a hospital or specialist. The Patient, as the central subject of care, provides medical history and other relevant data, which are recorded in the Electronic Health Record (EHR). The Specialist, with expertise in a specific field, evaluates the patient, performs necessary tests, and documents findings in the EHR. This process may include requesting additional lab tests or consulting other specialists to ensure comprehensive care.
+      </p>
+      <p>
+        The Clinical Decision Support System (CDSS) plays a critical role by analyzing the patient’s data stored in the EHR. It generates recommendations to assist the specialist in deciding the next steps, such as referring the patient back to primary care for follow-up treatment or discharging the patient if no further intervention is needed. Once a decision is made, the hospital communicates the outcome and any treatment details to the primary care clinic, ensuring smooth continuation of care. This approach improves the referral process, increasing efficiency and facilitating evidence-based decision-making.
+      </p>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 ETL Pipeline Project. Created by Group-8.</p>
+  </footer>
+
+</body>
+</html>
