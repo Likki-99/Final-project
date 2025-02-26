@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Task: Procedure</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1c1f4a;
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+
+    h2, h3, h4 {
+      color: #1c1f4a;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 15px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    pre {
+      background: #f3f3f3;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: white;
+      background-color: #1c1f4a;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: #0f1136;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Task: Procedure</h1>
+    <p>
+      In this task, a procedure record for a patient is created and posted to the Primary Care FHIR Server. The procedure involves details of a Procedure including the practitioner, follow-up instructions, and clinical notes.
+    </p>
+
+    <h3>Code Snippets</h3>
+
+    <h4>Generate Procedure JSON</h4>
+    <pre><code>
+def generate_procedure_json(patient_id):
+    """Generate a JSON representation of a Procedure."""
+    procedure_json = {
+        "resourceType": "Procedure",
+        "id": "6",
+        "meta": {
+            "versionId": "1",
+            "lastUpdated": "2024-12-07T05:43:59.291+00:00",
+            "source": "#5MYycLD52F7ms8PO"
+        },
+        "text": {
+            "status": "generated"
+        },
+        "status": "completed",
+        "code": {
+            "coding": [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "1155885007",  # Aortic Valve Repair
+                    "display": "Aortic Valve Repair (Procedure)"
+                }
+            ],
+            "text": "Aortic Valve Repair"
+        },
+        "subject": {
+            "reference": f"Patient/{patient_id}"
+        },
+        "recorder": {
+            "reference": "Practitioner/4",
+            "display": "Dr Adam Careful"
+        },
+        "performer": [
+            {
+                "actor": {
+                    "reference": "Practitioner/4",
+                    "display": "Dr Adam Careful"
+                }
+            }
+        ],
+        "followUp": [
+            {
+                "text": "ROS 7 days - 2024-04-10"
+            }
+        ],
+        "note": [
+            {
+                "text": "Routine Aortic Valve Repair. Valve was repaired successfully."
+            }
+        ]
+    }
+    return procedure_json
+    </code></pre>
+
+    <h4>Post Procedure to Primary Care</h4>
+    <pre><code>
+def post_procedure_to_primary_care(procedure_data):
+    """Post Procedure data to Primary Care."""
+    response = requests.post(PRIMARY_CARE_URL, headers=get_headers(), json=procedure_data)
+    if response.status_code in [200, 201]:
+        print("Procedure data posted successfully to Primary Care!")
+        pprint(response.json())
+    else:
+        print(f"Failed to post procedure data. Status code: {response.status_code}")
+        print(f"Error: {response.text}")
+    </code></pre>
+
+    <h4>Main Execution</h4>
+    <pre><code>
+if __name__ == '__main__':
+    # Read patient resource ID from file
+    try:
+        with open(RESOURCE_FILE, 'r') as file:
+            primary_care_patient_id = file.read().strip()
+    except FileNotFoundError:
+        print(f"Error: {RESOURCE_FILE} not found.")
+        exit(1)
+
+    if not primary_care_patient_id:
+        print("Error: Patient ID is empty in the file.")
+        exit(1)
+
+    print(f"Using Patient ID: {primary_care_patient_id}")
+
+    # Generate Procedure JSON for Aortic Valve Repair
+    procedure_json = generate_procedure_json(primary_care_patient_id)
+
+    # Post Procedure to Primary Care
+    post_procedure_to_primary_care(procedure_json)
+    </code></pre>
+
+    <a href="etl_pipeline_documentation.html" class="button">Back to ETL Pipeline</a>
+  </div>
+</body>
+</html>
