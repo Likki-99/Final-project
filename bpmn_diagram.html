@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>BPMN Model Page</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1c1f4a;
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+
+    h2 {
+      color: #1c1f4a;
+      margin-bottom: 8px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      background-color: #1c1f4a;
+      padding: 8px 0;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      padding: 8px 12px;
+      margin: 0 3px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      background-color: #0f1136;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 10px auto;
+      padding: 15px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    section {
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    /* Section Colors */
+    section:nth-child(odd) {
+      background-color: #e3f2fd;
+    }
+
+    section:nth-child(even) {
+      background-color: #f7f7f7;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 10px auto;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .button {
+      display: inline-block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: white;
+      background-color: #1c1f4a; /* Same as navbar color */
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: #0f1136;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      background-color: #1c1f4a;
+      color: white;
+      padding: 10px 0;
+      margin-top: 10px;
+    }
+
+    footer a {
+      color: #90caf9;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="bpmn_diagram.html">BPMN Model</a>
+    <a href="use_case_diagram.html">Use Case Diagram</a>
+    <a href="etl_pipeline_documentation.html">ETL Pipeline Documentation</a>
+    <a href="insights.html">Insights</a>
+    <a href="team_contributions.html">Team Contributions</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <!-- Content -->
+  <div class="container">
+    <h1>BPMN Model Page</h1>
+
+    <!-- BPMN Diagram Section -->
+    <section>
+      <h2>BPMN Diagram</h2>
+      <p>Below is the BPMN model for the ETL pipeline:</p>
+      <img src="assets/bpmn_diagram.jpeg" alt="BPMN Diagram">
+      <p>
+        <a href="https://modeler.camunda.io/share/bb475466-0b8b-43fa-88b6-53569ff2fd66" target="_blank" class="button">View Full BPMN Model</a>
+      </p>
+    </section>
+
+    <!-- Explanation Section -->
+    <section class="description">
+      <h2>Explanation</h2>
+      <p>The BPMN model represents the process of a patient being referred by a Primary Care Clinic to a hospital for specialist treatment; this model clearly identifies tasks, decisions, and communication. The process begins in the Primary Care Clinic, where a Referral Request is initiated, User Task. Upon receiving the referral, a Review Referral task and another User Task will be used to verify the referral's details. Once the referral is approved, the Patient Registration task is carried out. This task is followed by the Specialist Evaluates and Treats Patient task, where a specialist provides the necessary treatment. This evaluation and treatment are modeled as a User Task, reflecting the specialist's expertise and direct interaction with the patient.</p>
+
+      <p>After treatment, an Exclusive Gateway is used to determine the next step. If further care is required, the patient is referred back to the Primary Care Clinic through the Refer Back to Primary Care Clinic task, a User Task. Alternatively, if the patient’s issue is resolved, they are discharged through the Discharge Patient task, which involves protocols to ensure a smooth discharge. In the final stage, the hospital communicates treatment details and recommendations to the Primary Care Clinic, represented by the Communicate Treatment Details task. At the Primary Care Clinic, staff perform a User Task to update the patient’s medical records and schedule follow-up care if necessary. This BPMN model effectively represents the collaboration between the Primary Care Clinic and the hospital, ensuring clear communication, thorough documentation, and seamless patient care throughout the process.</p>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 ETL Pipeline Project. Created by Group-8.</p>
+  </footer>
+
+</body>
+</html>

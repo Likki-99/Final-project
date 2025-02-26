@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Final Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f7f7f7;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      width: 100%;
+      background-color: #1c1f4a;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .content-wrapper {
+      display: flex;
+      flex: 1;
+      padding: 20px;
+    }
+
+    .contents-bar {
+      width: 250px;
+      position: sticky;
+      top: 20px;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-right: 20px;
+    }
+
+    .contents-bar h3 {
+      font-size: 1.2rem;
+      color: #1c1f4a;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .contents-bar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contents-bar ul li {
+      margin-bottom: 8px;
+    }
+
+    .contents-bar ul li a {
+      text-decoration: none;
+      color: #1976d2;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .contents-bar ul li a:hover {
+      color: #ff6f61;
+      text-decoration: underline;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-content h1 {
+      text-align: center;
+      color: #1c1f4a;
+    }
+
+    .main-content section {
+      margin-bottom: 20px;
+    }
+
+    .main-content section:nth-child(odd) {
+      background-color: #e3f2fd;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .main-content section:nth-child(even) {
+      background-color: #f7f7f7;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    Health Informatics Standards and Terminologies - Final Project
+  </div>
+
+  <div class="content-wrapper">
+
+    <div class="contents-bar">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="bpmn_diagram.html">BPMN Model</a></li>
+        <li><a href="use_case_diagram.html">Use Case Diagram</a></li>
+        <li><a href="etl_pipeline_documentation.html">ETL Pipeline Documentation</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="team_contributions.html">Team Contributions</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <h1>Final Project Overview</h1>
+
+      <section>
+        <h2>Introduction</h2>
+        <p>
+    We successfully implemented an ETL (Extract, Transform, Load) pipeline that achieves data interoperability between systems such as
+    <span style="color: maroon; font-weight: bold;">OpenEMR</span>, and a <span style="color: olive; font-weight: bold;">Primary Care EHR</span>. This project solves the challenge of seamlessly exchanging
+    patient information, their conditions, observations, and procedures and adhering to FHIR (Fast Healthcare Interoperability Resources) standards at the same time.
+    We have extracted data from OpenEMR, transformed it using SNOMED CT terminologies and loaded it into the target system -
+    Primary Care EHR. This project uses Python and REST APIs to automate the data exchange between healthcare systems.
+      </p>
+
+      </section>
+
+      <section>
+        <h3>Purpose</h3>
+        <p> The purpose of this ETL pipeline is to integrate and transform the data between multiple systems - OpenEMR FHIR Server, Hermes Terminology Server, and the Primary Care EHR FHIR Server. This pipeline facilitates data exchange and management of patient information. </p>
+      </section>
+
+      <section>
+  <h3>ETL Pipeline Overview</h3>
+  <section>
+  <h3 style="text-align: center;">ETL Pipeline Overview</h3>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <svg width="800" height="500">
+      <!-- OpenEMR FHIR Server -->
+      <rect x="50" y="100" width="180" height="80" fill="#e3f2fd" stroke="#1e88e5" stroke-width="2" rx="10"></rect>
+      <text x="140" y="130" font-size="14" text-anchor="middle" fill="#1e88e5" font-weight="bold">OpenEMR FHIR</text>
+      <text x="140" y="150" font-size="12" text-anchor="middle" fill="#1e88e5">(Source)</text>
+
+      <!-- Hermes SNOMED Terminology Server -->
+      <rect x="310" y="300" width="200" height="80" fill="#e8f5e9" stroke="#43a047" stroke-width="2" rx="10"></rect>
+      <text x="410" y="330" font-size="14" text-anchor="middle" fill="#43a047" font-weight="bold">Hermes SNOMED</text>
+      <text x="410" y="350" font-size="12" text-anchor="middle" fill="#43a047">Terminology Server</text>
+
+      <!-- Local Computer -->
+      <rect x="310" y="100" width="200" height="80" fill="#ffebee" stroke="#d32f2f" stroke-width="2" rx="10"></rect>
+      <text x="410" y="130" font-size="14" text-anchor="middle" fill="#d32f2f" font-weight="bold">Python App</text>
+      <text x="410" y="150" font-size="12" text-anchor="middle" fill="#d32f2f">(Local Computer)</text>
+
+      <!-- Primary Care EHR Server -->
+      <rect x="600" y="100" width="180" height="80" fill="#ede7f6" stroke="#673ab7" stroke-width="2" rx="10"></rect>
+      <text x="690" y="130" font-size="14" text-anchor="middle" fill="#673ab7" font-weight="bold">Primary Care EHR</text>
+      <text x="690" y="150" font-size="12" text-anchor="middle" fill="#673ab7">(Target)</text>
+
+      <!-- Arrows and Labels -->
+      <!-- OpenEMR to Local Computer -->
+      <line x1="230" y1="140" x2="310" y2="140" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"></line>
+      <text x="270" y="130" font-size="12" text-anchor="middle" fill="#333">OAuth 2.0</text>
+
+      <!-- Local Computer to Hermes -->
+      <line x1="410" y1="180" x2="410" y2="300" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"></line>
+      <text x="420" y="240" font-size="12" fill="#333">GET</text>
+
+      <!-- Local Computer to Primary Care -->
+      <line x1="510" y1="140" x2="600" y2="140" stroke="black" stroke-width="2" marker-end="url(#arrowhead)"></line>
+      <text x="560" y="130" font-size="12" text-anchor="middle" fill="#333">POST</text>
+
+      <!-- Arrowhead Marker -->
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="black" />
+        </marker>
+      </defs>
+    </svg>
+  </div>
+</section>
+
+      </section>
+
+      <section>
+        <h3>Summary of Deliverables</h3>
+        <p>
+          Our project resulted in the following deliverables:
+          <ul>
+            <li><b>ETL Pipeline:</b> We created an Automated ETL pipeline to combine OpenEMR and Primary Care EHR using SNOMED CT and FHIR standards.</li>
+            <li><b>BPMN Model:</b> A BPMN diagram that resembles the ETL process.</li>
+            <li><b>Use Case Diagram:</b> A use case diagram that depicts actors in the system and interactions with the ETL pipeline.</li>
+            <li><b>Project Documentation:</b> A Detailed documentation of the project workflow and insights.</li>
+            <li><b>Git Repository:</b> Git Repository with the source code.</li>
+          </ul>
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+</body>
+</html>
